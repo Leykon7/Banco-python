@@ -46,16 +46,15 @@ class Conta():
         """
         self.__senha = novaSenha
 
-    def saque(self, senha,valor):
+    def saque(self, senha, valor):
         """
-        Método para realização de uma saque
+        Método para realização de um saque
         :param senha: senha da conta
         :param valor: valor do saque
         """
         if senha == self.__senha:
             if self._saldo >= valor:
                 self._saldo -= valor
-                print(f"Saque no valor de R$ {valor} realizado com sucesso")
                 return True
             else:
                 print("Saldo insuficiente")
@@ -70,8 +69,10 @@ class Conta():
         """
         if valor > 0:
             self._saldo += valor
+            return True
         else:
             print("Valor inválido")
+            return False
 
     def exibeDados(self, senha):
         """
@@ -85,12 +86,13 @@ class Conta():
         else:
             print("Senha inválida")
     
-    def transferencia(self, senha, valor, numC):
+    def transferencia(self, senha, valor, ContaCliente2):
         if self.saque(senha, valor):
-            numC.deposito(valor)
-            print("deu bom")
+            ContaCliente2.deposito(valor)
+            return True
         else:
-            print("deu ruim")
+            print("A transferência falhou")
+            return False
 
 
 class ContaPoupanca(Conta):#Cria uma classe derivada da classe conta,mantendo todas as funções já definidas em Conta
